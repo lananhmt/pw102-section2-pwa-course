@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
-import { LoginPage } from "./pom/login-page";
-import { DashboardPage } from "./pom/dashboard-page";
+import { LoginPage } from "./pom/admin/login-page";
+import { DashboardPage } from "./pom/admin/dashboard-page";
 
 test.describe("DB_AUTH Module", async () => {
     let loginPage: LoginPage;
@@ -8,10 +8,10 @@ test.describe("DB_AUTH Module", async () => {
 
     test.beforeEach(async ({ page }) => {
         loginPage = new LoginPage(page);
-        await loginPage.navigateToUrl(`${process.env.BASE_URL}wp-admin`);
+        await loginPage.navigateToUrl(loginPage.loginPageUrl);
     })
 
-    test("DB_AUTH_001", { tag: ['@UI', '@SMOKE'] }, async ({ page }) => {
+    test("DB_AUTH_001", { annotation: { type: ' Module ID', description: 'DB_AUTH' }, tag: ['@DB_AUTH_001', '@DB_AUTH', '@UI', '@SMOKE'] }, async ({ page }) => {
         await test.step("Input correct account", async () => {
             await loginPage.login(process.env.USERNAME as string, process.env.PASSWORD as string);
             dashboardPage = new DashboardPage(page);
@@ -20,7 +20,7 @@ test.describe("DB_AUTH Module", async () => {
         })
     })
 
-    test("DB_AUTH_002", { tag: '@UI' }, async () => {
+    test("DB_AUTH_002", { annotation: { type: ' Module ID', description: 'DB_AUTH' }, tag: ['@DB_AUTH_002', '@DB_AUTH', '@UI'] }, async () => {
         await test.step("Input incorrect account", async () => {
             await loginPage.login(`${process.env.USERNAME}incorrect`, `${process.env.PASSWORD}incorrect`);
             expect(await loginPage.getElementText(loginPage.errorMsgXpath)).toBe(`Error: The username ${process.env.USERNAME}incorrect is not registered on this site. If you are unsure of your username, try your email address instead.`)

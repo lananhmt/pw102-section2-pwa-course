@@ -1,7 +1,8 @@
 import { Page } from "@playwright/test";
-import { BasePage } from "./base-page";
+import { BasePage } from "../base-page";
 
 export class LoginPage extends BasePage {
+    loginPageUrl: string = `${process.env.BASE_URL}wp-admin`;
     usernameInputXpath: string = "//input[@id='user_login']";
     passwordInputXpath: string = "//input[@id='user_pass']";
     loginBtnXpath: string = "//input[@id='wp-submit']";
