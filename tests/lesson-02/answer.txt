@@ -1,0 +1,40 @@
+1. Tại sao autoMockServer setup trước beforeAll?
+- Vì autoMockServer là worker-scoped và auto fixture -> luôn được tự động khởi tạo ngay khi worker bắt đầu - trước tất cả các test/ hook.
+
+
+2. Tại sao userCredentials chỉ setup trước second test mà không setup ở first test?
+- Vì second test: sử dụng fixture loggedInPage mà loggedInPage lại phụ thuộc vào fixture userCredentials -> fixture userCredentials setup trước, sau đó tới loggedInPage setup, sau đó second test chạy.
+- Còn first test: chỉ sử dụng fixture page, không phụ thuộc bất kì fixture nào khác -> không setup userCredentials.
+
+
+3. Tại sao loggedInPage và autoLogApi teardown sau mỗi test, nhưng userCredentials và autoMockServer teardown cuối cùng?
+- loggedInPage và autoLogApi: là test-scoped nên teardown sau test
+- userCredentials và autoMockServer: là worker-scoped nên teardown sau worker
+
+
+4. Nếu thêm loggedInPage vào first test, log cuối cùng sẽ thay đổi thế nào? Dự đoán.
+Dự đoán sẽ theo thứ tự:
+
+Start mock server
+Before All
+
+Start logging API
+Before Each
+Create user credentials
+Login as admin
+first test
+After Each
+Logout
+Stop logging API
+
+Start logging API
+Before Each
+Login as admin
+second test
+After Each
+Logout
+Stop logging API
+
+After All
+Delete user credentials
+Stop mock server
