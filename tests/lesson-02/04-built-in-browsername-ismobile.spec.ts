@@ -1,8 +1,8 @@
 import { test, expect } from "@playwright/test";
-import { LoginPage } from "./pom/admin/login-page";
-import { AddProductPage } from "./pom/admin/add-product-page";
-import { AllProductPage } from "./pom/admin/all-product-page";
-import { HomePage } from "./pom/user/home-page";
+import { LoginPage } from "../../pom/e-commerce-web/admin/login-page";
+import { AddProductPage } from "../../pom/e-commerce-web/admin/add-product-page";
+import { AllProductPage } from "../../pom/e-commerce-web/admin/all-product-page";
+import { HomePage } from "../../pom/e-commerce-web/user/home-page";
 import { JSONDataReader } from "../lesson-02/utils/json-reader";
 
 test.describe("PRODUCT Module", async () => {
@@ -12,7 +12,11 @@ test.describe("PRODUCT Module", async () => {
     let allProductPage: AllProductPage;
     const testData = JSONDataReader(`tests/lesson-02/data/${process.env.ENV}-data.json`);
 
-    test.beforeEach(async ({ page }) => {
+    test.beforeEach(async ({ page, browserName, isMobile }) => {
+        console.log(`Browser name: ${browserName}`);
+        if (isMobile) {
+            test.skip(true, 'Test is skipped on mobile devices');
+        }
         loginPage = new LoginPage(page);
         addProductPage = new AddProductPage(page);
         await loginPage.loginPass();
@@ -29,17 +33,13 @@ test.describe("PRODUCT Module", async () => {
         await expect(await allProductPage.getLocatorByXpath(allProductPage.deleteSuccessMsgXpath)).toBeVisible();
     })
 
-    test.skip(({ isMobile }) => isMobile, 'Skip on mobile');
-
-    test("Add product successfully", { annotation: { type: "Module ID", description: "PRODUCT" }, tag: ["@PRODUCT_001", "@PRODUCT"] }, async ({ page, browserName }) => {
+    test("Add product successfully", { annotation: { type: "Module ID", description: "PRODUCT" }, tag: ["@PRODUCT_001", "@PRODUCT"] }, async ({ page }) => {
         await test.step("Step 1: Fill product info, then click Publish", async () => {
-            console.log(browserName);
             await addProductPage.addNewProduct(testData["Product name"], testData["Product price"]["Regular price"], testData["Product price"]["Sale price"]);
             await expect(await addProductPage.getLocatorByXpath(addProductPage.addSuccessMsgXpath)).toBeVisible();
         })
 
         await test.step("Step 2: Navigate to Product page, then verify product info", async () => {
-            console.log(browserName);
             homePage = new HomePage(page);
             await homePage.navigateToHomePage();
             const productList = await homePage.getProductList();

@@ -1,5 +1,5 @@
 import { Page } from "@playwright/test";
-import { BasePage } from "../base-page";
+import { BasePage } from "../..//base-page";
 
 export class AllProductPage extends BasePage {
     allProductPageUrl = `${process.env.BASE_URL}wp-admin/edit.php?post_type=product`;

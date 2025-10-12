@@ -1,8 +1,8 @@
 import { test, expect } from "@playwright/test";
-import { LoginPage } from "./pom/admin/login-page";
-import { AddProductPage } from "./pom/admin/add-product-page";
-import { AllProductPage } from "./pom/admin/all-product-page";
-import { HomePage } from "./pom/user/home-page";
+import { LoginPage } from "../../pom/e-commerce-web/admin/login-page";
+import { AddProductPage } from "../../pom/e-commerce-web/admin/add-product-page";
+import { AllProductPage } from "../../pom/e-commerce-web/admin/all-product-page";
+import { HomePage } from "../../pom/e-commerce-web/user/home-page";
 import { JSONDataReader } from "../lesson-02/utils/json-reader";
 
 test.describe("PRODUCT Module", async () => {

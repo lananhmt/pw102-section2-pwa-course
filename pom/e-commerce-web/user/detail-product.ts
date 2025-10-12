@@ -1,5 +1,5 @@
 import { Page } from "@playwright/test";
-import { BasePage } from "../base-page";
+import { BasePage } from "../..//base-page";
 
 export class DetailProductPage extends BasePage {
     productNameXpath = "//div[contains(@class,'entry-summary')]/h1[contains(@class,'product_title')]";

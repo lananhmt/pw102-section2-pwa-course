@@ -1,5 +1,5 @@
 import { Page } from "@playwright/test";
-import { BasePage } from "../base-page";
+import { BasePage } from "../..//base-page";
 
 export class LoginPage extends BasePage {
     loginPageUrl = `${process.env.BASE_URL}wp-admin`;

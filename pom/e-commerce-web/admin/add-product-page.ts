@@ -1,5 +1,5 @@
 import { Page } from "@playwright/test";
-import { BasePage } from "../base-page";
+import { BasePage } from "../..//base-page";
 
 export class AddProductPage extends BasePage {
     addProductPageUrl = `${process.env.BASE_URL}wp-admin/post-new.php?post_type=product`;

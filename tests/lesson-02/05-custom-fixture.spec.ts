@@ -1,8 +1,8 @@
 import { expect } from "@playwright/test";
-import { AddProductPage } from "./pom/admin/add-product-page";
-import { AllProductPage } from "./pom/admin/all-product-page";
-import { HomePage } from "./pom/user/home-page";
-import { DetailProductPage } from "./pom/user/detail-product";
+import { AddProductPage } from "../../pom/e-commerce-web/admin/add-product-page";
+import { AllProductPage } from "../../pom/e-commerce-web/admin/all-product-page";
+import { HomePage } from "../../pom/e-commerce-web/user/home-page";
+import { DetailProductPage } from "../../pom/e-commerce-web/user/detail-product";
 import { test } from "../lesson-02/fixture/login.fixture";
 import { JSONDataReader } from "../lesson-02/utils/json-reader";
 
