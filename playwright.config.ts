@@ -21,7 +21,7 @@ export default defineConfig({
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
-  retries: process.env.CI ? 2 : 1,
+  retries: process.env.CI ? 2 : 0,
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : 1,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
@@ -35,11 +35,43 @@ export default defineConfig({
     trace: 'on',
   },
 
+  // Auto generate 'authen file' after login + delete 'authen file' after complete
+  globalSetup: require.resolve('./tests/lesson-03/global-settings/global-setup.ts'),
+  globalTeardown: require.resolve('./tests/lesson-03/global-settings/global-teardown.ts'),
+
   /* Configure projects for major browsers */
   projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      use: {
+        ...devices['Desktop Chrome'],
+        headless: false
+      },
+    },
+
+    {
+      name: 'chrome auto authenticate',
+      use: {
+        browserName: 'chromium',
+        storageState: '.playwright/auth.json',
+      },
+      testIgnore: [
+        '**/login*.spec.ts',
+        '**/login*.spec.js',
+        '**/register*.spec.ts',
+        '**/register*.spec.js'
+      ]
+    },
+
+    {
+      name: 'firefox for login',
+      use: { browserName: 'firefox' },
+      testMatch: [
+        '**/login*.spec.ts',
+        '**/login*.spec.js',
+        '**/register*.spec.ts',
+        '**/register*.spec.js'
+      ]
     },
 
     // {

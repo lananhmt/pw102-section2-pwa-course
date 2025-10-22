@@ -2,7 +2,13 @@
   "name": "pwa-course",
   "version": "1.0.0",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "lananh:run-smoke": "npx playwright test -g '@SMOKE'",
+    "lananh:run-chrome": "npx playwright test --project=chromium",
+    "lananh:run-chrome-headed": "npx playwright test --project=chromium --headed",
+    "lananh:run-last-failed": "npx playwright test --last-failed",
+    "lananh:run-3times": "npx playwright test --repeat-each 3"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",

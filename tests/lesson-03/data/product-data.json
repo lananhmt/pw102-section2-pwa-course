@@ -1,0 +1,14 @@
+{
+    "PRODUCT_003": {
+        "dev": {
+            "productName": "[Lan Anh] Khoá học API Testing với Postman",
+            "regularPrice": "100",
+            "salePrice": "80"
+        },
+        "prod": {
+            "productName": "[Lan Anh] Khoá học Performance testing với K6",
+            "regularPrice": "100",
+            "salePrice": "80"
+        }
+    }
+}
