@@ -36,8 +36,8 @@ export default defineConfig({
   },
 
   // Auto generate 'authen file' after login + delete 'authen file' after complete
-  globalSetup: require.resolve('./tests/lesson-03/global-settings/global-setup.ts'),
-  globalTeardown: require.resolve('./tests/lesson-03/global-settings/global-teardown.ts'),
+  // globalSetup: require.resolve('./tests/lesson-03/global-settings/global-setup.ts'),
+  // globalTeardown: require.resolve('./tests/lesson-03/global-settings/global-teardown.ts'),
 
   /* Configure projects for major browsers */
   projects: [
@@ -49,30 +49,30 @@ export default defineConfig({
       },
     },
 
-    {
-      name: 'chrome auto authenticate',
-      use: {
-        browserName: 'chromium',
-        storageState: '.playwright/auth.json',
-      },
-      testIgnore: [
-        '**/login*.spec.ts',
-        '**/login*.spec.js',
-        '**/register*.spec.ts',
-        '**/register*.spec.js'
-      ]
-    },
+    // {
+    //   name: 'chrome auto authenticate',
+    //   use: {
+    //     browserName: 'chromium',
+    //     storageState: '.playwright/auth.json',
+    //   },
+    //   testIgnore: [
+    //     '**/login*.spec.ts',
+    //     '**/login*.spec.js',
+    //     '**/register*.spec.ts',
+    //     '**/register*.spec.js'
+    //   ]
+    // },
 
-    {
-      name: 'firefox for login',
-      use: { browserName: 'firefox' },
-      testMatch: [
-        '**/login*.spec.ts',
-        '**/login*.spec.js',
-        '**/register*.spec.ts',
-        '**/register*.spec.js'
-      ]
-    },
+    // {
+    //   name: 'firefox for login',
+    //   use: { browserName: 'firefox' },
+    //   testMatch: [
+    //     '**/login*.spec.ts',
+    //     '**/login*.spec.js',
+    //     '**/register*.spec.ts',
+    //     '**/register*.spec.js'
+    //   ]
+    // },
 
     // {
     //   name: 'firefox',
