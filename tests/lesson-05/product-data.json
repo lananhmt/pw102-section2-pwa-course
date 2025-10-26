@@ -1,0 +1,14 @@
+{
+    "category": {
+        "name": "[Lan Anh] Electronics",
+        "description": "Electronic devices and gadgets"
+    },
+    "product": {
+        "name": "[Lan Anh] iPhone 15 Pro",
+        "description": "Latest Apple smartphone with advanced features",
+        "price": 10000000,
+        "quantity": 10,
+        "newName": "[Lan Anh] PWA102 product",
+        "newPrice": 3000
+    }
+}
